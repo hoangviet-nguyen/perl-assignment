@@ -66,6 +66,15 @@ package Exam_File {
         required    => 1,
     );
 
+    has rules => (
+        is          => 'rw',
+        isa         => 'Str',
+        reader      => 'get_rules',
+        writer      => 'set_rules',
+        default     => 'Rules not set',
+        required    => 1, 
+    );
+
     has items => (
         is      => 'ro',
         isa     => 'ArrayRef[MCI]',
@@ -113,16 +122,19 @@ package Exam_File {
         my $file_name = $current_date. $self -> get_master_file() ."\n";
 
         # randomize the items
-        $self -> randomize_questions();
+        $self -> _randomize_questions();
 
 
-        open my $out_fh, '>', $file_name;
+        open my $out_fh, '>', $file_name; 
         my $q_counter = 1;
+        print $out_fh $self -> get_rules();
+
 
         # write items to file
         foreach my $item (@{$self -> get_items()}) {
             print $out_fh "_" x 80 ."\n\n";
             print $out_fh $item -> print_item($q_counter);
+            print $out_fh "\n";
             $q_counter++;
         }
 

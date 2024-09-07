@@ -52,9 +52,10 @@ package MCI {
     use strict;
 
     has question => (
-        is          => 'ro',
+        is          => 'rw',
         isa         => 'Str',
         reader      => 'get_question',
+        writer      => 'set_question',
         required    => 1,  
     );
 
@@ -65,7 +66,7 @@ package MCI {
     );
 
     has answers => (
-        is      => 'ro',
+        is      => 'rw',
         isa     => 'ArrayRef[Str]',
         reader  => 'get_answers', 
         writer  => 'set_answers',
@@ -88,6 +89,11 @@ package MCI {
         push @{$self -> get_answers()}, $right_answer;
     }
 
+    sub replace_answer {
+        my ($self, $index, $answer) = @_;
+        $self -> get_answers() -> [$index] = $answer;
+    }
+
     sub randomize_answers {
         my $self = shift;
         my @shuffled = shuffle(@{$self -> get_answers()});
@@ -103,7 +109,7 @@ package MCI {
             $item = $item."[ ]    ".$answer."\n";
         }
 
-        return $item."\n";
+        return $item;
     }
 
     sub get_right_answer {

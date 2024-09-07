@@ -65,3 +65,83 @@ use warnings;
 use lib './src/task_1a';
 use Exam_File;
 use MCI;
+use autodie qw( open close );
+
+# regex matching pattern
+my $separator_pattern = qr/^[_]+$/;
+my $exam_end_pattern = qr/^(=+|.*\bEND OF EXAM\b.*)$/;
+my $answer_pattern = qr/^\s*\[\s*[Xx]?\s*\]/;
+my $empty_line_pattern = qr/^\s*$/;
+
+my $master_file = create_master_file($ARGV[0]); 
+$master_file -> create_exam_file();
+
+sub create_master_file {
+    my $file_path = shift;
+    my $right_answer = 0;
+    my $master_file = Exam_File -> new(master_file => $file_path);
+    open my $file ,'<', $file_path;
+    my $rules = "";
+
+    # append the ruleset for the master file
+    while (my $line = <$file>) {
+        last if $line =~ $separator_pattern;
+        $rules .= $line;
+    }
+
+    while (defined(my $line = <$file>)) {
+        next if $line =~ $empty_line_pattern;
+        last if $line =~ $exam_end_pattern;
+
+        # Start capturing the question text
+        my $question = '';
+        do {
+            chomp($line);
+            $line =~ s/^\s*(\d+\.\s*)?|\s+$//g;
+            $question .= " " if $question;
+            $question .= $line;
+
+        } while (defined($line = <$file>) && $line !~ $empty_line_pattern);
+
+        my $item = MCI -> new(question => $question);
+        my $current_answer = -1;
+
+
+        # loop until seperator
+        while(defined($line = <$file>) && $line !~ $separator_pattern && $line !~ $exam_end_pattern) {
+            next if $line =~ $empty_line_pattern;
+            my $answer = $line;
+            $answer =~ s/^\s+|\s+$//g;
+
+
+            if($answer =~ $answer_pattern) {
+                if ($answer =~ s/\[\s*X\s*\]\s*//i) {
+                    $item->set_right_answer($answer);
+                    $right_answer = 1;
+                } else {
+                    # Remove any [ ] from other answers
+                    $answer =~ s/\[\s*\]\s*//;
+                    $item->add_answer($answer);
+                    $right_answer = 0;
+                }
+
+            } else {
+                my $sub_answer = $item -> get_answers()->[$current_answer]. " ".$answer;
+                $item -> replace_answer($current_answer, $sub_answer);
+
+                if ($right_answer) {
+                    $item -> set_right_answer($sub_answer);
+                }
+
+                next;
+            }
+
+            $current_answer++;
+        }
+
+        $master_file -> add_item($item);
+    }
+
+    return $master_file;
+}
+
