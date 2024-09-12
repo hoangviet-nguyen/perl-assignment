@@ -63,29 +63,83 @@ Hoang Viet Nguyen - Developed as part of the Introduction to Perl for Programmer
 use strict;
 use warnings;
 use lib './src/task_1a';
+use lib './src/task_1b';
 use Master_File;
 use MCI;
 use autodie qw( open close );
+use Student;
+use Scorer;
 
 # regex matching pattern
 my $separator_pattern = qr/^[_]+$/;
 my $exam_end_pattern = qr/^(=+|.*\bEND OF EXAM\b.*)$/;
 my $answer_pattern = qr/^\s*\[\s*[Xx]?\s*\]/;
 my $empty_line_pattern = qr/^\s*$/;
-my $chosen_answer = qr/\[\s*[a-zA-Z]\s*\]/;
+my $chosen_answer_pattern = qr/\[\s*[a-zA-Z]\s*\]/;
+my $student_id_pattern  = qr/.*Student\s+ID:\s+\[?(\d+)\]?.*/i;
+my $family_name_pattern = qr/.*Family\s+Name:\s+\[?([^\]]+)\]?.*/i;
+my $first_name_pattern  = qr/.*First\s+Name:\s+\[?([^\]]+)\]?.*/i;
+    
 
-my $master_file = create_master_file($ARGV[0]); 
-$master_file -> create_exam_file();
+my $master_file_path = shift @ARGV;
+my @student_paths = @ARGV;
+my $master_file = create_master_file($master_file_path);
+my @students = create_students(@student_paths);
+my $scorer = Scorer -> new(master_file => $master_file, students => @students);
+$scorer -> print_student_performance();
+
+sub create_students {
+    my (@paths) = @_;
+    my @students;
+
+    foreach my $path (@paths) {
+        open my $file, '<', $path;
+        my $student = create_student($path, $file);
+        while (defined(my $line = <$file>)) {
+            next if $line =~ $empty_line_pattern;
+            last if $line =~ $exam_end_pattern;
+            my $item = create_item($line, $file);
+            $student -> add_item($item);
+        }
+
+        push @students, $student;
+    }
+
+    return \@students;
+}
+
+sub create_student {
+    my ($path, $file) = @_;
+    my $first_name = "";
+    my $family_name = "",
+    my $student_id = "";
+
+    #extract student info and skip to the first item
+    while (defined(my $line = <$file>)) {
+        last if $line =~ $separator_pattern;
+        if ($line =~ $student_id_pattern) {
+            $student_id = $line;
+        }
+        if ($line =~ $first_name_pattern) {
+            $first_name = $line;
+        }
+        if ($line =~ $family_name_pattern) {
+            $family_name = $line;
+        }
+
+    }
+    return Student -> new (file_path => $path, first_name => $first_name, family_name => $family_name, student_id => $student_id);
+}
+
 
 sub create_master_file {
-    my $file_path = shift;
-    my $right_answer = 0;
-    my $master_file = Master_File -> new(master_file => $file_path);
-    open my $file ,'<', $file_path;
+    my ($file_name) = @_;
+    my $master_file = Master_File -> new(file_name => $file_name);
+    open my $file ,'<', $file_name;
     my $rules = "";
 
     # append the ruleset for the master file
-    while (my $line = <$file>) {
+    while (defined(my $line = <$file>)) {
         last if $line =~ $separator_pattern;
         $rules .= $line;
     }
@@ -93,55 +147,7 @@ sub create_master_file {
     while (defined(my $line = <$file>)) {
         next if $line =~ $empty_line_pattern;
         last if $line =~ $exam_end_pattern;
-
-        # Start capturing the question text
-        my $question = '';
-        do {
-            chomp($line);
-            $line =~ s/^\s*(\d+\.\s*)?|\s+$//g;
-            $question .= " " if $question;
-            $question .= $line;
-
-        } while (defined($line = <$file>) && $line !~ $empty_line_pattern);
-
-        my $item = MCI -> new(question => $question);
-        my $current_answer = -1;
-
-
-        # loop until seperator
-        while(defined($line = <$file>) && $line !~ $separator_pattern && $line !~ $exam_end_pattern) {
-            next if $line =~ $empty_line_pattern;
-            my $answer = $line;
-            $answer =~ s/^\s+|\s+$//g;
-
-
-            if($answer =~ $answer_pattern) {
-                if ($answer =~ s/$chosen_answer//g) {
-                    # Remove any extra whitespaces after removing [X]
-                    $answer =~ s/^\s+|\s+$//g;
-                    $item->set_right_answer($answer);
-                    $right_answer = 1;
-                } else {
-                    # Remove any [ ] and leading whitespaces from other answers 
-                    $answer =~ s/\[\s*\]\s*//;
-                    $item->add_answer($answer);
-                    $right_answer = 0;
-                }
-
-            } else {
-                my $sub_answer = $item -> get_answers()->[$current_answer]. " ".$answer;
-                $item -> replace_answer($current_answer, $sub_answer);
-
-                if ($right_answer) {
-                    $item -> set_right_answer($sub_answer);
-                }
-
-                next;
-            }
-
-            $current_answer++;
-        }
-
+        my $item = create_item($line, $file);
         $master_file -> add_item($item);
     }
 
@@ -149,3 +155,62 @@ sub create_master_file {
     return $master_file;
 }
 
+sub create_item {
+    my ($line, $file) = @_;
+    my $question = extract_question($line, $file);
+    my $item = MCI -> new(question => $question);
+    extract_answers($item, $line, $file);
+    return $item;
+}
+
+
+sub extract_question {
+    my ($line, $file) = @_;
+    # Start capturing the question text
+    my $question = '';
+    do {
+        chomp($line);
+        $line =~ s/^\s*(\d+\.\s*)?|\s+$//g;
+        $question .= " " if $question;
+        $question .= $line;
+    } while (defined($line = <$file>) && $line !~ $empty_line_pattern);
+
+    return $question;
+}
+
+
+sub extract_answers {
+    my ($item, $line, $file) = @_;
+    my $current_answer = -1;
+    my $chosen_answer = 0;
+
+    while(defined($line = <$file>) && $line !~ $separator_pattern && $line !~ $exam_end_pattern) {
+        next if $line =~ $empty_line_pattern;
+        my $answer = $line;
+        $answer =~ s/^\s+|\s+$//g; # remove leading whitespaces
+
+
+        if($answer !~ $answer_pattern) {
+            my $sub_answer = $item -> get_answers()->[$current_answer]. " ".$answer;
+            $item -> replace_answer($current_answer, $sub_answer);
+            if ($chosen_answer) {
+                $item -> set_chosen_answer($sub_answer);
+            }
+            next;
+        }
+
+        if ($answer =~ s/$chosen_answer_pattern//g) {
+            # Remove any extra whitespaces after removing [X]
+            $answer =~ s/^\s+|\s+$//g;
+            $item-> set_chosen_answer($answer);
+            $chosen_answer = 1;
+        } else {
+            # Remove any [ ] and leading whitespaces from other answers 
+            $answer =~ s/\[\s*\]\s*//;
+            $item->add_answer($answer);
+            $chosen_answer = 0;
+        }
+
+        $current_answer++;
+    }
+}

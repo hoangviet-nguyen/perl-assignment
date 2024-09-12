@@ -59,10 +59,10 @@ package MCI {
         required    => 1,  
     );
 
-    has right_answer => ( 
+    has chosen_answer => ( 
         is          => 'rw',
         isa         => 'Str',
-        default     => 'Right answer has not been set yet',
+        default     => 'Chosen answer has not been set yet',
     );
 
     has answers => (
@@ -83,15 +83,20 @@ package MCI {
         push @{$self -> get_answers()}, $answer;
     }
 
-    sub set_right_answer {
-        my ($self, $right_answer) = @_;
-        $self -> right_answer($right_answer);
-        push @{$self -> get_answers()}, $right_answer;
+    sub has_answer {
+        my ($self, $answer) = @_;
+         return grep {$_ eq $answer} @{ $self->get_answers() };
     }
 
-    sub get_right_answer {
+    sub set_chosen_answer {
+        my ($self, $chosen_answer) = @_;
+        $self -> chosen_answer($chosen_answer);
+        push @{$self -> get_answers()}, $chosen_answer;
+    }
+
+    sub get_chosen_answer {
         my $self = shift;
-        return $self -> right_answer;
+        return $self -> chosen_answer;
     }
 
     sub replace_answer {

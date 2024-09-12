@@ -95,7 +95,7 @@ package Master_File {
         # map question and answer for scoring
         my ($self, $item) = @_;
         push @{$self -> get_items()}, $item;
-        $self -> get_solutions()->{$item -> get_question()} = $item -> get_right_answer();
+        $self -> get_solutions()->{$item -> get_question()} = $item -> get_chosen_answer();
     }
 
     sub _randomize_questions {
