@@ -89,7 +89,13 @@ package MCI {
         push @{$self -> get_answers()}, $right_answer;
     }
 
+    sub get_right_answer {
+        my $self = shift;
+        return $self -> right_answer;
+    }
+
     sub replace_answer {
+        # this method is inteded to replace mult
         my ($self, $index, $answer) = @_;
         $self -> get_answers() -> [$index] = $answer;
     }
@@ -112,12 +118,6 @@ package MCI {
         return $item;
     }
 
-    sub get_right_answer {
-        my $self = shift;
-        return $self -> right_answer;
-    }
-
     __PACKAGE__->meta->make_immutable;
     1;
-
 }

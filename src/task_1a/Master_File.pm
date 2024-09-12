@@ -50,7 +50,7 @@ and output new, randomized exam files tailored for different testing scenarios.
 =cut
 
 
-package Exam_File {
+package Master_File {
     use Moose;
     use MCI;
     use strict;
@@ -59,10 +59,10 @@ package Exam_File {
     use autodie qw( open close );
 
 
-    has master_file => (
+    has file_name => (
         is          => 'ro',
         isa         => 'Str',
-        reader      => 'get_master_file',
+        reader      => 'get_file_name',
         required    => 1,
     );
 
@@ -119,7 +119,7 @@ package Exam_File {
     sub create_exam_file {
         my $self = shift;
         my $current_date = strftime "%Y%m%d-%H%M%S-", localtime;
-        my $file_name = $current_date. $self -> get_master_file() ."\n";
+        my $file_name = $current_date. $self -> get_file_name() ."\n";
 
         # randomize the items
         $self -> _randomize_questions();
@@ -138,6 +138,9 @@ package Exam_File {
             $q_counter++;
         }
 
+        print $out_fh "=" x 80, "\n";
+        print $out_fh " " x 34, "END OF EXAM\n";
+        print $out_fh "=" x 80, "\n"; 
         close $out_fh;
     }
 

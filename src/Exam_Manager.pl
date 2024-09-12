@@ -63,7 +63,7 @@ Hoang Viet Nguyen - Developed as part of the Introduction to Perl for Programmer
 use strict;
 use warnings;
 use lib './src/task_1a';
-use Exam_File;
+use Master_File;
 use MCI;
 use autodie qw( open close );
 
@@ -72,6 +72,7 @@ my $separator_pattern = qr/^[_]+$/;
 my $exam_end_pattern = qr/^(=+|.*\bEND OF EXAM\b.*)$/;
 my $answer_pattern = qr/^\s*\[\s*[Xx]?\s*\]/;
 my $empty_line_pattern = qr/^\s*$/;
+my $chosen_answer = qr/\[\s*[a-zA-Z]\s*\]/;
 
 my $master_file = create_master_file($ARGV[0]); 
 $master_file -> create_exam_file();
@@ -79,7 +80,7 @@ $master_file -> create_exam_file();
 sub create_master_file {
     my $file_path = shift;
     my $right_answer = 0;
-    my $master_file = Exam_File -> new(master_file => $file_path);
+    my $master_file = Master_File -> new(master_file => $file_path);
     open my $file ,'<', $file_path;
     my $rules = "";
 
@@ -115,11 +116,13 @@ sub create_master_file {
 
 
             if($answer =~ $answer_pattern) {
-                if ($answer =~ s/\[\s*X\s*\]\s*//i) {
+                if ($answer =~ s/$chosen_answer//g) {
+                    # Remove any extra whitespaces after removing [X]
+                    $answer =~ s/^\s+|\s+$//g;
                     $item->set_right_answer($answer);
                     $right_answer = 1;
                 } else {
-                    # Remove any [ ] from other answers
+                    # Remove any [ ] and leading whitespaces from other answers 
                     $answer =~ s/\[\s*\]\s*//;
                     $item->add_answer($answer);
                     $right_answer = 0;
@@ -142,6 +145,7 @@ sub create_master_file {
         $master_file -> add_item($item);
     }
 
+    $master_file -> set_rules($rules);
     return $master_file;
 }
 
