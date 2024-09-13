@@ -5,20 +5,22 @@ Exam_Manager.pl - Script for Managing and Scoring Multiple Choice Exams
 
 =head1 SYNOPSIS
 This script provides a command-line interface for generating randomized multiple choice exam files from a master file 
-and scoring student submissions. It uses the Exam_File and MCI classes to manage questions, randomize them, and produce new exam versions. 
-Options for scoring and identifying potential academic misconduct are included in extensions.
+and scoring student submissions. It utilizes the Master_File and MCI classes to manage questions, randomize them, and 
+produce new exam versions. Additionally, it scores student submissions and generates performance reports. 
 
 =head1 DESCRIPTION
-The Exam_Manager.pl script is designed to streamline the creation and assessment of multiple choice exams. 
+The Exam_Manager.pl script is designed to streamline the creation and assessment of multiple-choice exams. 
 It offers the following functionalities:
 
 =over 4
 
-=item * Generation of randomized exam files from a specified master file.
+=item * Generation of randomized exam files from a specified master file, including the randomization of both questions and their answers.
 
-=item * Utilization of the Exam_File and MCI classes to handle exam questions and their answers
+=item * Utilization of the Master_File and MCI classes to handle exam questions and their answers, ensuring integrity and randomness for new exam files.
 
-=item * Capability to score student submissions against the master file with extensions for detailed analysis including detecting potential misconduct.
+=item * Capability to score student submissions against the master file, including reporting missing or incorrect answers.
+
+=item * Command-line interface (CLI) interaction, allowing users to choose between generating exams and scoring student submissions.
 
 =back
 
@@ -28,31 +30,22 @@ Introduction to Perl for Programmers course.
 =head1 USAGE
 1. **Initialization**:
 
-    Start by loading a master exam file. This file contains the base questions and answers which 
-    will be used to generate randomized versions or to score against student submissions.
+    Start by loading a master exam file. This file contains the base questions and answers which will be used to 
+    generate randomized versions or to score against student submissions.
 
     Usage:
-    ```
-    perl Exam_Manager.pl master_exam_file.txt
+    ```bash
+    perl Exam_Manager.pl master_exam_file.txt student_exam1.txt student_exam2.txt ...
     ```
 
-2. **Operation Options**: 
+2. **Operation Options**:
 
     After loading the master file, the script provides a command-line interface (CLI) with options 
     to either generate a new randomized exam file or score student responses. Follow the prompts on the CLI 
     to select the desired operation:
 
-=head1 EXTENSIONS
-
-Additional functionality for scoring includes:
-
-=over 4
-
-=item * Inexact matching of answers to allow for minor transcription errors.
-
-=item * Detailed reporting of scores with the option to flag suspicious patterns indicative of academic misconduct.
-
-=back
+    - B<e>: Generate a new randomized exam file.
+    - B<s>: Score student submissions and output performance reports.
 
 =head1 AUTHOR
 
@@ -80,13 +73,32 @@ my $student_id_pattern  = qr/.*Student\s+ID:\s+\[?(\d+)\]?.*/i;
 my $family_name_pattern = qr/.*Family\s+Name:\s+\[?([^\]]+)\]?.*/i;
 my $first_name_pattern  = qr/.*First\s+Name:\s+\[?([^\]]+)\]?.*/i;
     
-
+# command dialog
 my $master_file_path = shift @ARGV;
 my @student_paths = @ARGV;
 my $master_file = create_master_file($master_file_path);
 my @students = create_students(@student_paths);
 my $scorer = Scorer -> new(master_file => $master_file, students => @students);
-$scorer -> print_student_performance();
+print "Would you like to create new exams (e) or to score (s) the students?\n";
+my $command = <STDIN>
+my $validCommand = 0;
+chomp($command);
+
+while(!$validCommand) {
+    $command = lc($command);
+    if ($command eq "s") {
+        $scorer -> print_student_performance();
+        print "Creating grades.txt\n";
+        $validCommand = 1;
+    } elsif ($command eq "e") {
+        $master_file -> create_exam_file();
+        print "Creating new exam file\n"
+        $validCommand = 1;
+    } else {
+        print "Please enter a valid command (e/s)";
+        $command = chomp(<STDIN>);
+    }
+}
 
 sub create_students {
     my (@paths) = @_;

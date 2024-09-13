@@ -4,19 +4,24 @@
 MCI - Multiple Choice Item Management
 
 =head1 SYNOPSIS
-This class encapsulates a single multiple choice question and its associated answer choices. 
-It provides functionalities for the effective management of questions and their answers, including capabilities 
-for answer randomization and the anonymization of correct answers in preparation for exam generation.
+The MCI (Multiple Choice Item) class encapsulates a single multiple-choice question and its associated answers. 
+It provides functionalities for managing the question and its answers, including randomization of answer choices and setting 
+the correct answer for scoring purposes.
 
 =head1 DESCRIPTION
-The MCI (Multiple Choice Item) class acts as a container for individual exam questions along with their possible answers. 
-It supports the following operations:
+The MCI class acts as a container for individual multiple-choice questions and their possible answers. 
+It supports several operations for exam creation, including randomizing answer choices and preparing questions for output. 
+The class is used within the exam management system to handle each question-answer item independently.
+
+This class supports the following operations:
 
 =over 4
 
-=item * Adding answers to questions and marking the correct one.
+=item * Adding answers to a question and marking the correct one.
 
-=item * Randomizing the order of answer choices to prevent answer pattern recognition during exams.
+=item * Randomizing the order of answer choices to prevent answer pattern recognition.
+
+=item * Formatting a question and its answers for display in an exam.
 
 =back
 
@@ -24,24 +29,31 @@ It supports the following operations:
 
 =over 4
 
-=item * add_answer($answer) - Adds a new answer choice to a question.
+=item * B<add_answer($answer)>
+Adds a new answer choice to the list of answers for a given question.
 
-=item * set_right_answer($right_answer) - Specifies which of the added answers is correct.
+=item * B<has_answer($answer)>
+Checks if a given answer is part of the current question's answer choices.
 
-=item * randomize_answers - Shuffles the order of the answer choices.
+=item * B<set_chosen_answer($chosen_answer)>
+Specifies which of the added answers is the correct one and appends it to the list of answers.
 
-=item * print_item($q_num) - Formats the question and its answers for output, including prepending each answer with an unchecked checkbox.
+=item * B<get_chosen_answer()>
+Retrieves the correct answer for the current question.
 
-=item * get_right_answer - Retrieves the correct answer for scoring purposes.
+=item * B<replace_answer($index, $answer)>
+Replaces the answer at the specified index with a new one. This is useful when updating existing answers.
+
+=item * B<randomize_answers()>
+Shuffles the order of the answer choices to ensure that the answers are randomized in each generated exam.
+
+=item * B<print_item($q_num)>
+Formats the question and its associated answers for output.
 
 =back
 
-=head1 USAGE
-Instances of the MCI class are used throughout the exam file creation process to manage individual questions and their answers. 
-They are crucial for the functionality of the Exam_File class, which compiles these items into complete exam documents.
-
 =head1 AUTHOR
-[Hoang Viet Nguyen] - Developed for the Introduction to Perl for Programmers course final project.
+Hoang Viet Nguyen - Developed as part of the Introduction to Perl for Programmers course final project.
 
 =cut
 

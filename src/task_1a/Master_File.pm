@@ -1,22 +1,24 @@
 =pod
 
 =head1 NAME
-Exam_File - Multiple Choice Exam File Processor
+Master_File - Class for Managing and Processing Multiple Choice Exam Files
 
 =head1 SYNOPSIS
-This class manages and processes multiple choice exam files. It is designed to facilitate the collection, 
-organization, and randomization of exam questions and their answers for the generation of varied exam versions.
+This class manages and processes multiple-choice exam files, facilitating the collection, organization, 
+and randomization of exam questions and their answers for generating diverse exam versions.
 
 =head1 DESCRIPTION
-The Exam_File class handles multiple choice exam content. Key functionalities include:
+The Master_File class handles the core functionality of managing multiple-choice exam content. It supports:
 
 =over 4
 
-=item * Collecting multiple choice questions into a manageable format.
+=item * Collecting multiple-choice questions into a manageable format.
 
-=item * Mapping each question to its correct answer to ensure accurate scoring.
+=item * Mapping each question to its correct answer for accurate scoring.
 
-=item * Randomizing the order of questions to prepare diverse exam sets, thereby enhancing exam integrity.
+=item * Randomizing the order of questions and answers to generate varied exam sets, enhancing exam integrity.
+
+=item * Creating new exam files with randomized content, ensuring each file is unique.
 
 =back
 
@@ -24,28 +26,27 @@ The Exam_File class handles multiple choice exam content. Key functionalities in
 
 =over 4
 
-=item * add_item($item)
+=item * B<add_item($item)>
 Adds a new Multiple Choice Item (MCI) to the exam. This method also maps the question to its correct answer for later scoring.
 
-=item * _randomize_questions
-Private method to shuffle both the questions and their answers. This method is used internally to ensure that each exam file 
-generated has a unique arrangement of questions.
+=item * B<get_item($question)>
+Retrieves the Multiple Choice Item (MCI) for a specific question.
 
-=item * get_answer($question)
-Retrieves the correct answer for a given question. This method is essential for scoring purposes.
+=item * B<_randomize_questions>
+Private method that randomizes the order of both the questions and their answers to ensure unique exam arrangements.
 
-=item * create_exam_file
-Generates a new exam file with randomized content. The file is named with a timestamp to ensure uniqueness. 
-This method handles the writing of questions and answers to the new file in a randomized order.
+=item * B<get_answer($question)>
+Returns the correct answer for a given question, which is essential for scoring purposes.
+
+=item * B<create_exam_file>
+Generates a new exam file with randomized content. The file is named with a timestamp to ensure uniqueness and contains 
+randomized questions and answers.
 
 =back
 
-=head1 USAGE
-Instances of this class are used to load questions from a designated master file, manipulate the question order,
-and output new, randomized exam files tailored for different testing scenarios.
 
 =head1 AUTHOR
-[Hoang Viet Nguyen] - Developed for the Introduction to Perl for Programmers course final project.
+Hoang Viet Nguyen - Developed as part of the Introduction to Perl for Programmers course final project.
 
 =cut
 
