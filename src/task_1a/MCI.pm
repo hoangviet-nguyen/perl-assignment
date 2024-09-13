@@ -73,11 +73,6 @@ package MCI {
         default => sub {[]},
     );
 
-    sub display_question {
-        my $self = shift;
-        print $self -> get_question(), "\n";
-    }
-
     sub add_answer {
         my ($self, $answer) = @_;
         push @{$self -> get_answers()}, $answer;

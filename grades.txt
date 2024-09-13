@@ -1,0 +1,225 @@
+data/FHNW_Perl_Class/Arnold_Jenny.txt: 
+data/FHNW_Perl_Class/Arnold_Jenny.txt....................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Beck_Till.txt: 
+data/FHNW_Perl_Class/Beck_Till.txt.......................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Berger_Carina.txt: 
+data/FHNW_Perl_Class/Berger_Carina.txt...................................................................................................................................................................21/30
+
+data/FHNW_Perl_Class/Berger_Maria.txt: 
+data/FHNW_Perl_Class/Berger_Maria.txt....................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Betrüger_Offenbar.txt: 
+data/FHNW_Perl_Class/Betrüger_Offenbar.txt.............................................................................................................................................................23/30
+
+data/FHNW_Perl_Class/Böhm_Ramona.txt: 
+data/FHNW_Perl_Class/Böhm_Ramona.txt...................................................................................................................................................................0/30
+
+data/FHNW_Perl_Class/Boseman_Chad.txt: 
+Missing question: The static type of a Perl variable is determined by:
+Missing question: Perl's three main types of call context (or "amount context") are:
+Missing question: The "default variable" (or "topic variable") is:
+Missing question: You can access the command-line arguments of a Perl program via:
+Missing question: The main repository for Open Source Perl modules is:
+Missing question: The three standard sigils for variable declarations are:
+Missing question: The difference between a 'my' variable and an 'our' variable is:
+Missing question: A single-quoted string (such as: 'I will achieve 100% on this exam')...
+Missing question: The term qq{XXXXX} is...
+Missing question: Which of the following is NOT a single valid Perl number?
+Missing question: An array is...
+Missing question: An 'if' statement requires curly brackets around the statements it controls...
+Missing question: To specify a second alternative test after an 'if', the correct keyword is:
+Missing question: "Short-circuiting" of a boolean expression means...
+Missing question: A "foreach-style" loop (such as: for (@list) {...}) will be iterated...
+Missing question: The 'while' loop in Perl...
+Missing question: The keywords for the Perl switch statement are:
+Missing question: Which five Perl values are the only values that ever evaluate false?
+Missing question: If the array @x contains four elements, how many elements will be in the list (1, @x, 2)?
+Missing question: A hash variable stores...
+Missing question: The expression 1 / 'Inf' produces the result:
+Missing question: A "reference" in Perl is best described as:
+Missing question: In Perl, you can take references to...
+Missing question: User-defined subroutines are declared with the keyword:
+Missing question: Which variable contains the argument with which a subroutine was called?
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+Missing question: If a user-defined subroutine does not contain a 'return' statement...
+Missing question: The keyword to throw an exception in Perl is:
+Missing question: How can exceptions be caught and subsequently accessed in Perl?
+Missing question: What is the purpose of the 'use strict' pragma?
+data/FHNW_Perl_Class/Boseman_Chad.txt....................................................................................................................................................................0/0
+
+data/FHNW_Perl_Class/Frank_Tina.txt: 
+Missing answer: sub two_or_more ($flag, @data)           {...}
+Missing answer: sub two_or_more ($data, $flag)           {...}
+Missing answer: sub two_or_more ($flag, $data = @extras) {...}
+Missing answer: sub two_or_more ($flag, ...)             {...}
+Missing answer: sub two_or_more (@flags, @data_set)      {...}
+data/FHNW_Perl_Class/Frank_Tina.txt......................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Fuchs_Silke.txt: 
+data/FHNW_Perl_Class/Fuchs_Silke.txt.....................................................................................................................................................................24/30
+
+data/FHNW_Perl_Class/Graf_Jenny.txt: 
+data/FHNW_Perl_Class/Graf_Jenny.txt......................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Groß_Henry.txt: 
+data/FHNW_Perl_Class/Groß_Henry.txt.....................................................................................................................................................................26/30
+
+data/FHNW_Perl_Class/Günther_Melanie.txt: 
+data/FHNW_Perl_Class/Günther_Melanie.txt...............................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Haas_Charlotte.txt: 
+data/FHNW_Perl_Class/Haas_Charlotte.txt..................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Heinrich_Matthias.txt: 
+data/FHNW_Perl_Class/Heinrich_Matthias.txt...............................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Hoffmann_Christina.txt: 
+Missing answer: A mutable pointer to a value or variable, without type-checking
+data/FHNW_Perl_Class/Hoffmann_Christina.txt..............................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Hofmann_Kate.txt: 
+data/FHNW_Perl_Class/Hofmann_Kate.txt....................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Jung_Silke.txt: 
+data/FHNW_Perl_Class/Jung_Silke.txt......................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Keller_Julian.txt: 
+data/FHNW_Perl_Class/Keller_Julian.txt...................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Klein_Melissa.txt: 
+data/FHNW_Perl_Class/Klein_Melissa.txt...................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Köhler_Miriam.txt: 
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+data/FHNW_Perl_Class/Köhler_Miriam.txt.................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Krämer_Nils.txt: 
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+data/FHNW_Perl_Class/Krämer_Nils.txt...................................................................................................................................................................0/30
+
+data/FHNW_Perl_Class/Lang_Vinz.txt: 
+Missing question: You can access the command-line arguments of a Perl program via:
+data/FHNW_Perl_Class/Lang_Vinz.txt.......................................................................................................................................................................19/30
+
+data/FHNW_Perl_Class/Lehmann_Maria.txt: 
+data/FHNW_Perl_Class/Lehmann_Maria.txt...................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Linz_Marcus.txt: 
+data/FHNW_Perl_Class/Linz_Marcus.txt.....................................................................................................................................................................15/30
+
+data/FHNW_Perl_Class/Ludwig_Alexander.txt: 
+data/FHNW_Perl_Class/Ludwig_Alexander.txt................................................................................................................................................................21/30
+
+data/FHNW_Perl_Class/Möller_Linda.txt: 
+data/FHNW_Perl_Class/Möller_Linda.txt..................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Organa_Leia.txt: 
+Missing answer: ...endlessly, until a 'last' is executed in the loop
+data/FHNW_Perl_Class/Organa_Leia.txt.....................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Otto_Anja.txt: 
+data/FHNW_Perl_Class/Otto_Anja.txt.......................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Otto_Kristin.txt: 
+data/FHNW_Perl_Class/Otto_Kristin.txt....................................................................................................................................................................26/30
+
+data/FHNW_Perl_Class/Otto_Sara.txt: 
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+data/FHNW_Perl_Class/Otto_Sara.txt.......................................................................................................................................................................26/30
+
+data/FHNW_Perl_Class/Pohl_Adrian.txt: 
+data/FHNW_Perl_Class/Pohl_Adrian.txt.....................................................................................................................................................................23/30
+
+data/FHNW_Perl_Class/Pohl_Leonie.txt: 
+data/FHNW_Perl_Class/Pohl_Leonie.txt.....................................................................................................................................................................17/30
+
+data/FHNW_Perl_Class/Richter_Steffi.txt: 
+data/FHNW_Perl_Class/Richter_Steffi.txt..................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Rogers_Stefan.txt: 
+Missing question: The static type of a Perl variable is determined by:
+Missing question: Perl's three main types of call context (or "amount context") are:
+Missing question: The "default variable" (or "topic variable") is:
+Missing question: You can access the command-line arguments of a Perl program via:
+Missing question: The main repository for Open Source Perl modules is:
+Missing question: The three standard sigils for variable declarations are:
+Missing question: The difference between a 'my' variable and an 'our' variable is:
+Missing question: A single-quoted string (such as: 'I will achieve 100% on this exam')...
+Missing question: The term qq{XXXXX} is...
+Missing question: Which of the following is NOT a single valid Perl number?
+Missing question: An array is...
+Missing question: An 'if' statement requires curly brackets around the statements it controls...
+Missing question: To specify a second alternative test after an 'if', the correct keyword is:
+Missing question: "Short-circuiting" of a boolean expression means...
+Missing question: A "foreach-style" loop (such as: for (@list) {...}) will be iterated...
+Missing question: The 'while' loop in Perl...
+Missing question: The keywords for the Perl switch statement are:
+Missing question: Which five Perl values are the only values that ever evaluate false?
+Missing question: If the array @x contains four elements, how many elements will be in the list (1, @x, 2)?
+Missing question: A hash variable stores...
+Missing question: The expression 1 / 'Inf' produces the result:
+Missing question: A "reference" in Perl is best described as:
+Missing question: In Perl, you can take references to...
+Missing question: User-defined subroutines are declared with the keyword:
+Missing question: Which variable contains the argument with which a subroutine was called?
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+Missing question: If a user-defined subroutine does not contain a 'return' statement...
+Missing question: The keyword to throw an exception in Perl is:
+Missing question: How can exceptions be caught and subsequently accessed in Perl?
+Missing question: What is the purpose of the 'use strict' pragma?
+data/FHNW_Perl_Class/Rogers_Stefan.txt...................................................................................................................................................................0/0
+
+data/FHNW_Perl_Class/Roth_Lara.txt: 
+data/FHNW_Perl_Class/Roth_Lara.txt.......................................................................................................................................................................25/30
+
+data/FHNW_Perl_Class/Schäfer_Alexander.txt: 
+data/FHNW_Perl_Class/Schäfer_Alexander.txt.............................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Schmitt_Lisa.txt: 
+data/FHNW_Perl_Class/Schmitt_Lisa.txt....................................................................................................................................................................26/30
+
+data/FHNW_Perl_Class/Scholz_Micha.txt: 
+data/FHNW_Perl_Class/Scholz_Micha.txt....................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Schreiber_Amin.txt: 
+data/FHNW_Perl_Class/Schreiber_Amin.txt..................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Schröder_Manuel.txt: 
+data/FHNW_Perl_Class/Schröder_Manuel.txt...............................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Schubert_Frank.txt: 
+data/FHNW_Perl_Class/Schubert_Frank.txt..................................................................................................................................................................26/30
+
+data/FHNW_Perl_Class/Schulte_Antonia.txt: 
+data/FHNW_Perl_Class/Schulte_Antonia.txt.................................................................................................................................................................22/30
+
+data/FHNW_Perl_Class/Schwarz_Patrick.txt: 
+data/FHNW_Perl_Class/Schwarz_Patrick.txt.................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Vogel_Tobias.txt: 
+data/FHNW_Perl_Class/Vogel_Tobias.txt....................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Wagner_Caro.txt: 
+Missing question: Which one of the following subroutine declarations correctly declares a subroutine that can must be called with at least two arguments but which may also be called with more than two arguments?
+data/FHNW_Perl_Class/Wagner_Caro.txt.....................................................................................................................................................................23/30
+
+data/FHNW_Perl_Class/Walter_Chris.txt: 
+data/FHNW_Perl_Class/Walter_Chris.txt....................................................................................................................................................................27/30
+
+data/FHNW_Perl_Class/Walter_Lea.txt: 
+data/FHNW_Perl_Class/Walter_Lea.txt......................................................................................................................................................................25/30
+
+data/FHNW_Perl_Class/Walter_Lina.txt: 
+data/FHNW_Perl_Class/Walter_Lina.txt.....................................................................................................................................................................28/30
+
+data/FHNW_Perl_Class/Werner_Christin.txt: 
+data/FHNW_Perl_Class/Werner_Christin.txt.................................................................................................................................................................29/30
+
+data/FHNW_Perl_Class/Winter_Nico.txt: 
+data/FHNW_Perl_Class/Winter_Nico.txt.....................................................................................................................................................................25/30
+
+data/FHNW_Perl_Class/Wolff_Michelle.txt: 
+data/FHNW_Perl_Class/Wolff_Michelle.txt..................................................................................................................................................................28/30
+
