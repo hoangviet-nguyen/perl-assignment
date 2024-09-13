@@ -80,9 +80,9 @@ my $master_file = create_master_file($master_file_path);
 my @students = create_students(@student_paths);
 my $scorer = Scorer -> new(master_file => $master_file, students => @students);
 print "Would you like to create new exams (e) or to score (s) the students?\n";
-my $command = <STDIN>
-my $validCommand = 0;
+my $command = <STDIN>;
 chomp($command);
+my $validCommand = 0;
 
 while(!$validCommand) {
     $command = lc($command);
@@ -92,11 +92,12 @@ while(!$validCommand) {
         $validCommand = 1;
     } elsif ($command eq "e") {
         $master_file -> create_exam_file();
-        print "Creating new exam file\n"
+        print "Creating new exam file\n";
         $validCommand = 1;
     } else {
         print "Please enter a valid command (e/s)";
-        $command = chomp(<STDIN>);
+        $command = <STDIN>;
+        chomp($command);
     }
 }
 

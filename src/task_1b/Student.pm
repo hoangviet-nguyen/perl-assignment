@@ -181,7 +181,7 @@ package Student {
     
     sub has_question {
         my ($self, $question) = @_;
-         return grep {$_ eq $answer} @{ $self->get_answers() };
+         return grep {$_ eq $question} @{ $self->get_answers() };
     }
 
     sub add_missing_question {

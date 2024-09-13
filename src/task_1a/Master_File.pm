@@ -120,7 +120,8 @@ package Master_File {
     sub create_exam_file {
         my $self = shift;
         my $current_date = strftime "%Y%m%d-%H%M%S-", localtime;
-        my $file_name = $current_date. $self -> get_file_name() ."\n";
+        my ($file_name) = $self->get_file_name() =~ m|([^/]+)$|;
+        $file_name = $current_date. $file_name ."\n";
 
         # randomize the items
         $self -> _randomize_questions();
