@@ -8,6 +8,7 @@ package Scorer {
     use Student;
     use autodie qw( open close );
     use MCI;
+    use Text::Levenshtein::XS qw(distance);
 
     has master_file => (
         is          => 'ro',
@@ -40,6 +41,9 @@ sub check_item {
         $student -> no_point($question);
         return 0;
     }
+
+    my $norm_master_question = $self -> normalize_text($question);
+    my $norm_student_question = $self -> normalize_text($student_item -> get_question());
 
     foreach my $answer (@{$master_item -> get_answers()}) {
         if (!$student_item -> has_answer($answer)) {
@@ -107,6 +111,28 @@ sub check_item {
                     Extensions
 ============================================================
 =cut
+
+sub normalize_text {
+    my $text = shift;
+
+    # Convert to lowercase
+    $text = lc($text);
+
+    # Remove leading/trailing whitespace
+    $text =~ s/^\s+|\s+$//g;
+
+    # Replace multiple spaces with a single space
+    $text =~ s/\s+/ /g;
+
+    # Remove common stop words (example set, you can expand it)
+    my @stop_words = qw(a an the of in on and or is);
+    my %stop_words_hash = map { $_ => 1 } @stop_words;
+    $text = join(" ", grep { !$stop_words_hash{$_} } split(/\s+/, $text));
+
+    return $text;
+}
+
+
 
 
 

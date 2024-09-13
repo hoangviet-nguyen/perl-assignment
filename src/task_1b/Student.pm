@@ -82,6 +82,12 @@ package Student {
         return $self -> get_items() -> {$question};
     }
 
+    
+    sub has_question {
+        my ($self, $question) = @_;
+         return grep {$_ eq $answer} @{ $self->get_answers() };
+    }
+
     sub add_missing_question {
         my ($self, $question) = @_;
         push @{$self -> get_missing_question()}, $question;
@@ -115,7 +121,7 @@ package Student {
         my $self = shift;
         my $total_points = $self -> get_total();
         my $num_question = keys %{$self -> get_selections()};
-        my $total_width = 200;
+        my $total_width = 100;
 
         # concatenate missing Q&A
         my $question_prefix = "Missing question: ";
@@ -131,11 +137,11 @@ package Student {
             $missing_answer .= $answer_prefix . $answer. "\n";
         }
 
-        my $dots_count = $total_width - length($self -> get_file_path());
+        my $dots_count = $total_width - length($self -> get_file_path()) - length("$total_points / $num_question");
         my $dots = "." x ($dots_count > 0 ? $dots_count : 0);
 
         my $performance = $self -> get_file_path(). ".". $dots . $total_points . "/" . $num_question ."\n";
-        return $self -> get_file_path().": \n" . $missing_question. $missing_answer. $performance ."\n";
+        return $self -> get_file_path().": \n" . $missing_question. $missing_answer. $performance. "=" x $total_width ."\n\n";
     }
 
     __PACKAGE__->meta->make_immutable;
